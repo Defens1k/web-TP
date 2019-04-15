@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>AskRusskikh</title>
+     {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css'%}">
+    </head>
+
+<body class="container">
+    <nav class="navbar navbar-default nav">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="{% url 'question_list'%}"><h1>AskRusskikh</h1></a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <form class="navbar-form navbar-left" method="get" action="{% url 'new_question'%}">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search" id="nav_search">
+        </div>
+          <button type="submit" class="btn btn-success">Ask!</button>
+      </form>
+      <div class="navbar-right" id="avatar_navbar">
+        {% if request.user.is_authenticated %}
+        <div class="navbar-left">
+            <div class="navbar_img">
+                <a href="{% url 'settings'%}">
+                <img  alt="72x72" src="{% static 'img/avatar.jpg' %}" class="img-thumbnail" >
+                </a>
+            </div>
+        </div>
+        <div  class="navbar-right">{{ request.user.username }} <p><a href="{% url 'settings'%}">Settings</a>   <a href="{% url 'logout'%}">Log out</a></p>
+        {% else %}
+           <p><a href="{% url 'register'%}">SignUp</a>   <a href="{% url 'login'%}">SignIn</a></p>
+        {% endif %}
+        </div>
+      </div>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<div class="row">
+    <div class="col-sm-9 left_side">
+        {% block content %}
+        {% endblock content %}
+    </div>
+    {% include "right.html" %}
+</div>
+</body>
+</html>

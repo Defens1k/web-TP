@@ -1,0 +1,39 @@
+{% extends "question_base.html" %}
+
+{% block content %}
+    <div class="row">
+        <h1 class="header" id="Grey">Tag: {{tag_name}}</h1>
+    </div>
+{% for q in questions %}
+            <div class="question">
+                     <div class="col-sm-2 question_info">
+                            <a href="#">
+                                {% load static %}
+                            <img src="{% static 'img/avatar.jpg' %}" alt="Avatar" class="img-thumbnail question_img">
+                            </a>
+                        <div class="raiting">
+                            <div class="btn-toolbar">
+                                <div>
+                                <button type="down" class="btn btn-default">-</button>
+                                <button type="button" class="btn btn-default" disabled="disabled">{{q.raiting}}</button>
+                                <button type="up" class="btn btn-default">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-8">
+                        <a href="{% url 'question_detail' q.id %}"><h4>{{q.title}}</h4></a>
+                          <p>{{q.text}}</p>
+                            <p><a> answer(3) </a> Tags:
+                            {% for tag in q.tag.all %}
+                            <a href="{% url 'tag' tag.id %}">{{tag.name}},</a>
+                            {% endfor %}
+                             Author:
+                            <a> {{q.author}} </a></p>
+                        </div>
+                        </div>
+            </div>
+    {% endfor %}
+        {% include "paginator.html" %}
+{% endblock content %}

@@ -1,0 +1,77 @@
+{% extends "question_base.html" %}
+
+{% block content %}
+         <div class="question">
+                    <div class="col-sm-2 ans_question_info">
+                    		<a href="#">
+                                {% load static %}
+                    		<img src="{% static 'img/avatar.jpg' %}" alt="Avatar" class="img-thumbnail ans_question_img">
+                    		</a>
+                    	<div class="raiting">
+                    		{{question_detail.rating}} 
+                        <div class="btn-toolbar">
+                            <div class="btn-group">
+                                <button type="down" class="btn btn-default btn-sm">-</button>
+                                <button type="button" class="btn btn-default btn-sm" disabled="disabled">5</button>
+                                <button type="up" class="btn btn-default btn-sm">+</button>
+                            </div>
+                        </div>
+                        </div>
+ 					</div>
+ 						<div class="row">
+	                    <div class="col-sm-8 question_body">
+	                    <h2>{{question_detail.title}}</h2>
+	                      <p>{{question_detail.text}}</p>
+                            <p><a> answer(3) </a> Tags:
+                            {% for tag in question_detail.tag.all %}
+                            <a href="{% url 'tag' tag.id %}">{{tag.name}},</a>
+                            {% endfor %}
+                             Author:
+                            <a> {{question_detail.author}} </a></p>
+	                	</div>
+	                	</div>
+            </div>
+            <div class = "answer1">
+            {% for a in answers %}
+            <div class="answer">
+                    <div class="col-sm-2 answer_info">
+                            <a name = "{{a.pk}}">
+                    		<img src="{% static 'img/avatar.jpg' %}" alt="Avatar" class="img-thumbnail answer_img">
+                            </a>
+                        <div class="raiting_answ">
+                            {{a.rating}}
+                        <div class="btn-toolbar">
+                            <div class="btn-group">
+                                <button type="down" class="btn btn-default btn-sm">-</button>
+                                <button type="button" class="btn btn-default btn-sm" disabled="disabled">5</button>
+                                <button type="up" class="btn btn-default btn-sm">+</button>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                        <div class="row">
+                        <div class="col-sm-8 answer_body">
+                        <h4 id = "Grey">{{a.author}}</h4>
+                        <p>{{a.text}}</p>
+                            <div id="Correct">
+                            <button disabled="disabled" id="correct_btn">Correct!</button>
+                            </div>
+                        </div>
+                        </div>
+            </div>
+            {% endfor %}
+            </div>
+
+            <form method="post">
+                {% csrf_token %}
+            <div class="your_answer">
+                <div>
+                    <div class="col-sm-2  input-group">
+                        {{form.text}}
+                          <!--<input type="text" class="form-control" id="text_field1" placeholder="Input your answer here">-->
+                    </div>
+                    <button type="submit" class ="answer2">Answer</button>
+                </div>
+            </div>
+            </form>
+{% endblock content %}

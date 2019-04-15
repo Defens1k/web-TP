@@ -1,0 +1,53 @@
+{% extends "question_base.html" %}
+
+{% block content %}
+<form method="post" action="">
+    {% csrf_token %}
+ <div class="row">
+		    	<h1 class="header">New Question</h1>
+		    </div>
+		    <div class="subject">
+			    <div  class="row">
+			    	<div class="col-sm-2" >
+			    		<b><big>Title</big></b>
+			    	</div>
+			    	<div class="col-sm-8">
+					<div class="input-group">
+                        {{form.short}}
+					</div>
+			    	</div>
+		   		</div>
+		    </div>
+
+            <div class="subject">
+                <div  class="row">
+                    <div class="col-sm-2" >
+                        <b><big>Text</big></b>
+                    </div>
+                    <div class="col-sm-8">
+                    <div class="input-group">
+                        {{form.text}}
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subject">
+                <div class="row">
+                    <div class="col-sm-2" >
+                        <b><big>Tags</big></b>
+                    </div>
+                    <div class="col-sm-8">
+                    <div class="input-group">
+                        {{form.tags.errors}}
+                        {{form.tags}}
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="btn-toolbar">
+              <button type="submit" class="btn btn-2f" id="ask_button">Ask!</button>
+            </div>
+</form>
+{% endblock content %}

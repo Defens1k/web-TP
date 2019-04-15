@@ -1,0 +1,18 @@
+<div class="col-sm-3" id="right_side">
+            <div class="row">
+                <h1>Popular Tags</h1>
+            </div>
+            <div class="row tags_body">
+            {% for t in popular_tags %}
+                <a href="/tag/{{t.pk}}"><b>{{t.name}}</b></a>
+            {% endfor %}
+            </div>
+            <div class="row">
+                <h1>Best Members</h1>
+            </div>
+            <ul class="best_body">
+                {% for m in members %}
+                <li><a href="#"><u><big>{{m.user.username}}</big></u></a></li>
+                {% endfor %}
+            </ul>
+    </div>

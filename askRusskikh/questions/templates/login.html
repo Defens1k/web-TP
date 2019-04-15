@@ -1,0 +1,44 @@
+{% extends "question_base.html" %}
+
+{% block content %}
+		    <div class="row">
+		    	<h1 class="header" id="Grey">Log In</h1>
+		    </div>
+			{%for k, error in form.errors.items%}
+		    	{{error|escape}}
+		    {%endfor%}
+           <form class="form-horizontal" method="post" action="">
+		    {% csrf_token %}
+
+		    <div class="subject">
+			    <div class="row">
+			    	<div class="col-sm-2" id="form_field">
+			    		<b><big>Login</big></b>
+			    	</div>
+			    	<div class="col-sm-8">
+    					<div class="input-group">
+    						{{form.username}}
+    					</div>
+			    	</div>
+		   		</div>
+		    </div>
+		    <div class="subject">
+			    <div class="row" >
+			    	<div class="col-sm-2" id="form_field">
+			    		<b><big>Password</big></b>
+			    	</div>
+			    	<div class="col-sm-8">
+					<div class="input-group">
+							{{ form.password }}
+					</div>
+
+                    <div class="btn-toolbar btn-login">
+                      <button type="submit" class="btn btn-2f" id="save_button">Log in!</button>
+                    </div>
+
+                    <p><a href="{% url 'register'%}"><b><u>create new account</u></b></a></p>
+			         </div>
+		   	    </div>
+		    </div>
+		    </form>
+{% endblock content %}
